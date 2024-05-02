@@ -159,7 +159,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             size: {
-                              type: float,
+                              type: "float",
                               index: false,
                             },
                             sizeInBytes: {
@@ -199,7 +199,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             size: {
-                              type: float,
+                              type: "float",
                               index: false,
                             },
                             sizeInBytes: {
@@ -239,7 +239,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             size: {
-                              type: float,
+                              type: "float",
                               index: false,
                             },
                             sizeInBytes: {
@@ -279,7 +279,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             size: {
-                              type: float,
+                              type: "float",
                               index: false,
                             },
                             sizeInBytes: {
@@ -323,7 +323,7 @@ module.exports = ({ strapi }) => ({
                       index: false,
                     },
                     size: {
-                      type: float,
+                      type: "float",
                       index: false,
                     },
                     updatedAt: {
