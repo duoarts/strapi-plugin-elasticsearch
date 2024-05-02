@@ -81,8 +81,6 @@ module.exports = ({ strapi }) => ({
     const esInterface = strapi.plugins["elasticsearch"].services.esInterface;
     if (indexName === null) indexName = await helper.getCurrentIndexName();
     let entries = [];
-    console.log("Indexing collection", collectionName, indexName);
-
     // Base query options
     let queryOptions = {
       sort: { createdAt: "DESC" },
