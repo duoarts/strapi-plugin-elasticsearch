@@ -21,6 +21,7 @@ const getModelPopulationAttributes = (model) => {
 };
 
 const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
+  console.log("getFullPopulateObject", modelUid, maxDepth, ignore);
   const skipCreatorFields = true;
 
   if (maxDepth <= 1) {
