@@ -32,8 +32,8 @@ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
   }
   // CHANGE: don't populate getFullPopulateObject api::label.label 3 [ 'images', 'categories', 'artists' ]
   if (modelUid == "api::label.label") {
-      return true;
-   }
+    return true;
+  }
   // CHANGED: also skip user from user permissions plugin
   if (modelUid === "user-permissions::user" && skipCreatorFields) {
     return undefined;
@@ -234,6 +234,9 @@ module.exports = ({ strapi }) => ({
     const model = strapi.getModel(collectionName);
     return model.attributes.publishedAt ? true : false;
   },
+  excludeUserLinked({ collectionName }) {
+    if (collectionName === "api::image.image") return true;
+  },
   getPopulateAttribute({ collectionName }) {
     //TODO : We currently have set populate to upto 4 levels, should
     //this be configurable or a different default value?
@@ -243,7 +246,7 @@ module.exports = ({ strapi }) => ({
     return collectionName + "::" + itemId;
   },
   getCurrentIndexName() {
-      // CHANGE: use same index
+    // CHANGE: use same index
     return "duoarts-index";
   },
   async storeCurrentIndexName(indexName) {
