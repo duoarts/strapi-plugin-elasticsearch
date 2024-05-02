@@ -1,5 +1,10 @@
 # Strapi plugin strapi-plugin-elasticsearch
 
+
+THIS IS A FORK and we modified it for our needs, and used as local plugin
+
+If you update, make sure u sync to strapi, `script/sync-elasticsearch-plugin` in strapi repos
+
 A plugin to enable integrating Elasticsearch with Strapi CMS.
 
 ## Installation
@@ -34,7 +39,7 @@ module.exports = {
           certificate: "<path to the certificate required to connect to Elasticsearch>"
         },
         indexAliasName: "<Alias name for the Elasticsearch index>"
-      }  
+      }
     },
     // ...
   }
@@ -55,7 +60,7 @@ module.exports = {
           certificate: path.join(__dirname, process.env.ELASTIC_CERT_NAME)
         },
         indexAliasName: process.env.ELASTIC_ALIAS_NAME
-      }  
+      }
     },
     // ...
   }
@@ -169,7 +174,7 @@ To enable backing up the indexing configuration or transferring it between vario
 ![image](https://github.com/geeky-biz/strapi-plugin-elasticsearch/assets/17068206/6e099392-499e-4101-8f51-85b7eff8aa38)
 
 ## Scheduling Indexing
-Once the collection attributes are configured for indexing, any changes to the respective collections & attributes is marked for indexing. The cron job (configured via `indexingCronSchedule`) makes actual indexing requests to the connected Elasticsearch instance. 
+Once the collection attributes are configured for indexing, any changes to the respective collections & attributes is marked for indexing. The cron job (configured via `indexingCronSchedule`) makes actual indexing requests to the connected Elasticsearch instance.
 
 - `Trigger Indexing` triggers the cron job immediately to perform the pending indexing tasks without waiting for the next scheduled run.
 - `Rebuild Indexing` completely rebuilds the index. It may be used if the Elasticsearch appears to be out of sync from the data within Strapi.
@@ -183,7 +188,7 @@ Whenever a collection is configured for indexing, it may already have data that 
 ## Searching
 You may directly use the Elasticsearch search API or you may use the Search API exposed by the plugin (at `/api/elasticsearch/search`). The plugin search API is just a wrapper around the Elasticsearch search API that passes the query parameter to the Elasticsearch search API and returns the results coming from Elasticsearch:
 
-For example, the below API call would result into the Elasticsearch search API being triggered with the query 
+For example, the below API call would result into the Elasticsearch search API being triggered with the query
 ```
 `/api/elasticsearch/search?query=query%5Bbool%5D%5Bshould%5D%5B0%5D%5Bmatch%5D%5Bcity%5D=atlanta`
 ```
@@ -231,7 +236,7 @@ module.exports = (plugin) => {
                     index: plugin.config.indexAliasName,
                     query: { "bool" : { "should" : [ { "match": { "content": "dummy"} } ] } },
                     size: pagesize,
-                    from: from 
+                    from: from
                 });
                 return result;
             }
@@ -247,8 +252,8 @@ module.exports = (plugin) => {
         path: '/enhanced-search',
         handler: 'performSearch.enhancedSearch',
       });
-  
-    
+
+
     return plugin;
 };
 
