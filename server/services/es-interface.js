@@ -43,11 +43,66 @@ module.exports = ({ strapi }) => ({
         if (!exists)
         {
           console.log('strapi-plugin-elasticsearch : Search index ', indexName, ' does not exist. Creating index.');
-        
+
+          // CHANGED: we add mappings here explictly, so we need to keep this in sync
           await client.indices.create({
             index: indexName,
+            body: {
+              settings: {
+                analysis: {
+                  tokenizer: {
+                    ngram_tokenizer: {
+                      type: "ngram",
+                      min_gram: 3,
+                      max_gram: 5
+                    }
+                  },
+                  analyzer: {
+                    ngram_analyzer: {
+                      type: "custom",
+                      tokenizer: "ngram_tokenizer",
+                      filter: ["lowercase"]
+                    }
+                  }
+                }
+              },
+              "mappings": {
+                "properties": {
+                  "description": {
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "title": {
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  },
+                  "value": {
+                    "type": "text",
+                    "analyzer": "ngram_analyzer",
+                    "fields": {
+                      "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                      }
+                    }
+                  }
+                }
+              }
+            }
           });
-        }    
+        }
       }
       catch (err)
       {
@@ -61,7 +116,7 @@ module.exports = ({ strapi }) => ({
           console.log('strapi-plugin-elasticsearch : Error while creating index.')
           console.log(err);
         }
-      }  
+      }
     },
     async deleteIndex(indexName){
       try{
@@ -80,7 +135,7 @@ module.exports = ({ strapi }) => ({
         {
           console.log('strapi-plugin-elasticsearch : Error while deleting index to ElasticSearch.')
           console.log(err);
-        }    
+        }
       }
     },
     async attachAliasToIndex(indexName) {
@@ -110,7 +165,7 @@ module.exports = ({ strapi }) => ({
         {
           console.log('strapi-plugin-elasticsearch : Attaching alias to the index - Error while setting up alias within ElasticSearch.')
           console.log(err);
-        }    
+        }
       }
     },
     async checkESConnection() {
@@ -126,7 +181,7 @@ module.exports = ({ strapi }) => ({
         console.error(error);
         return false;
       }
-      
+
     },
     async indexDataToSpecificIndex({itemId, itemData}, iName){
       try
@@ -149,14 +204,14 @@ module.exports = ({ strapi }) => ({
         return await this.indexDataToSpecificIndex({itemId, itemData}, pluginConfig.indexAliasName);
     },
     async removeItemFromIndex({itemId}) {
-        const pluginConfig = await strapi.config.get('plugin.elasticsearch');      
+        const pluginConfig = await strapi.config.get('plugin.elasticsearch');
         try
         {
           await client.delete({
             index: pluginConfig.indexAliasName,
             id: itemId
           });
-          await client.indices.refresh({ index: pluginConfig.indexAliasName });  
+          await client.indices.refresh({ index: pluginConfig.indexAliasName });
         }
         catch(err){
           if (err.meta.statusCode === 404)
@@ -166,7 +221,7 @@ module.exports = ({ strapi }) => ({
             console.error('strapi-plugin-elasticsearch : Error encountered while removing indexed data from ElasticSearch.')
             throw err;
           }
-        }    
+        }
     },
     async searchData(searchQuery){
       try
@@ -183,5 +238,5 @@ module.exports = ({ strapi }) => ({
         console.log('Search : elasticClient.searchData : Error encountered while making a search request to ElasticSearch.')
         throw err;
       }
-    }    
+    }
 });
