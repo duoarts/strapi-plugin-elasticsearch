@@ -89,7 +89,6 @@ module.exports = ({ strapi }) => ({
                     },
                     id: {
                       type: "long",
-                      index: false,
                     },
                     name: {
                       type: "text",
