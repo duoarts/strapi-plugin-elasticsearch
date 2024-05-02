@@ -36,20 +36,14 @@ module.exports = ({ strapi }) => ({
             {
                 const cols = await configureIndexingService.getCollectionsConfiguredForIndexing();
                 for (let r=0; r< cols.length; r++)
-                    await this.indexCollection(cols[r], newIndexName);
+                    await this.indexCollection(cols[r], currentIndex);
 
                 await scheduleIndexingService.markIndexingTaskComplete(item.id);
 
                 console.log('strapi-plugin-elasticsearch : Indexing of data into the new index complete.');
-                //Step 4 : Move the alias to this new index
-                await esInterface.attachAliasToIndex(newIndexName);;
-                console.log('strapi-plugin-elasticsearch : Attaching the newly created index to the alias.')
                 //Step 3 : Update the search-indexing-name
-                await helper.storeCurrentIndexName(newIndexName);
+                await helper.storeCurrentIndexName(currentIndex);
 
-                console.log('strapi-plugin-elasticsearch : Deleting the previous index : ', oldIndexName);
-                //Step 5 : Delete the previous index
-                await esInterface.deleteIndex(oldIndexName)
                 await logIndexingService.recordIndexingPass('Request to immediately re-index site-wide content completed successfully.');
 
                 return true;
