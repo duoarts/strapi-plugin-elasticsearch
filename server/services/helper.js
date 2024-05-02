@@ -30,6 +30,10 @@ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
   if (modelUid === "admin::user" && skipCreatorFields) {
     return undefined;
   }
+  // CHANGE: don't populate getFullPopulateObject api::label.label 3 [ 'images', 'categories', 'artists' ]
+  if (modelUid == "api::label.label") {
+     return undefined;
+   }
   // CHANGED: also skip user from user permissions plugin
   if (modelUid === "user-permissions::user" && skipCreatorFields) {
     return undefined;
