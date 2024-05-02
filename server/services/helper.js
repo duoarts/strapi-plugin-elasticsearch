@@ -237,23 +237,9 @@ module.exports = ({ strapi }) => ({
   getIndexItemId({ collectionName, itemId }) {
     return collectionName + "::" + itemId;
   },
-  async getCurrentIndexName() {
-    const pluginStore = getPluginStore();
-    const settings = await pluginStore.get({ key: "configsettings" });
-    let indexName = "duoarts-index_000001";
-    if (settings) {
-      const objSettings = JSON.parse(settings);
-      if (Object.keys(objSettings).includes("indexConfig")) {
-        const idxConfig = objSettings["indexConfig"];
-        indexName = idxConfig["name"];
-      }
-    }
-    return indexName;
-  },
-  async getIncrementedIndexName() {
-    const currentIndexName = await this.getCurrentIndexName();
-    const number = parseInt(currentIndexName.split("index_")[1]);
-    return "duoarts-index_" + String(number + 1).padStart(6, "0");
+  getCurrentIndexName() {
+      // CHANGE: use same index
+    return "duoarts-index";
   },
   async storeCurrentIndexName(indexName) {
     const pluginStore = getPluginStore();
