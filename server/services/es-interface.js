@@ -71,10 +71,10 @@ module.exports = ({ strapi }) => ({
                       filter: ["lowercase"]
                     }
                   },
-                  // Adjusting max ngram diff setting to allow min_gram and max_gram difference of 2
-                  index: {
-                    max_ngram_diff: 2
-                  }
+                },
+                // Adjusting max ngram diff setting to allow min_gram and max_gram difference of 2
+                index: {
+                  max_ngram_diff: 2
                 }
               },
               mappings: {
