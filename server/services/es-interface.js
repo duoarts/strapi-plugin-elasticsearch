@@ -40,9 +40,16 @@ module.exports = ({ strapi }) => ({
     async createIndex(indexName){
       try{
         const exists = await client.indices.exists({index: indexName});
-        if (!exists)
-        {
+        if (!exists) {
           console.log('strapi-plugin-elasticsearch : Search index ', indexName, ' does not exist. Creating index.');
+
+          // text type: Optimized for full-text search, the text type fields are analyzed,
+          //  which means the text is broken down into terms or tokens using a tokenizer and optionally further processed by filters
+          //  (like lowercasing, removing punctuation, etc.).
+          //   This is ideal for searches where the user might input a fragment of the field's content (like a part of a name or a sentence).
+          // keyword type: Not analyzed but indexed as a whole single term.
+          //  This is perfect for filtering, aggregations, and sorting, where exact matches are crucial.
+          //  For example, when filtering by a category, tag, or any identifier that requires precise matching.
 
           // CHANGED: we add mappings here explictly, so we need to keep this in sync
           await client.indices.create({
@@ -63,38 +70,39 @@ module.exports = ({ strapi }) => ({
                       tokenizer: "ngram_tokenizer",
                       filter: ["lowercase"]
                     }
+                  },
+                  // Adjusting max ngram diff setting to allow min_gram and max_gram difference of 2
+                  index: {
+                    max_ngram_diff: 2
                   }
                 }
               },
-              "mappings": {
-                "properties": {
-                  "description": {
-                    "type": "text",
-                    "analyzer": "ngram_analyzer",
-                    "fields": {
-                      "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
+              mappings: {
+                properties: {
+                  description: {
+                    type: "text",
+                    analyzer: "ngram_analyzer",
+                    fields: {
+                      keyword: {
+                        type: "keyword"
                       }
                     }
                   },
-                  "title": {
-                    "type": "text",
-                    "analyzer": "ngram_analyzer",
-                    "fields": {
-                      "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
+                  title: {
+                    type: "text",
+                    analyzer: "ngram_analyzer",
+                    fields: {
+                      keyword: {
+                        type: "keyword"
                       }
                     }
                   },
-                  "value": {
-                    "type": "text",
-                    "analyzer": "ngram_analyzer",
-                    "fields": {
-                      "keyword": {
-                        "type": "keyword",
-                        "ignore_above": 256
+                  value: {
+                    type: "text",
+                    analyzer: "ngram_analyzer",
+                    fields: {
+                      keyword: {
+                        type: "keyword"
                       }
                     }
                   }
