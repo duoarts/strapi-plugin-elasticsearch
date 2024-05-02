@@ -123,6 +123,7 @@ module.exports = ({ strapi }) => ({
         {
           console.log('strapi-plugin-elasticsearch : Error while creating index.')
           console.log(err);
+          throw err;
         }
       }
     },
