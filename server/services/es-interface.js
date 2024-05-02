@@ -84,11 +84,11 @@ module.exports = ({ strapi }) => ({
                 categories: {
                   properties: {
                     createdAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                     id: {
-                      type: long,
+                      type: "long",
                       index: false,
                     },
                     name: {
@@ -102,11 +102,11 @@ module.exports = ({ strapi }) => ({
 
                     },
                     publishedAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                     updatedAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                   },
@@ -123,7 +123,7 @@ module.exports = ({ strapi }) => ({
                 file: {
                   properties: {
                     createdAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                     ext: {
@@ -147,7 +147,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             height: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             mime: {
@@ -163,7 +163,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             sizeInBytes: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             url: {
@@ -171,7 +171,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             width: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                           },
@@ -187,7 +187,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             height: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             mime: {
@@ -203,7 +203,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             sizeInBytes: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             url: {
@@ -211,7 +211,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             width: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                           },
@@ -227,7 +227,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             height: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             mime: {
@@ -243,7 +243,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             sizeInBytes: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             url: {
@@ -251,7 +251,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             width: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                           },
@@ -267,7 +267,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             height: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             mime: {
@@ -283,7 +283,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             sizeInBytes: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                             url: {
@@ -291,7 +291,7 @@ module.exports = ({ strapi }) => ({
                               index: false,
                             },
                             width: {
-                              type: long,
+                              type: "long",
                               index: false,
                             },
                           },
@@ -303,11 +303,11 @@ module.exports = ({ strapi }) => ({
                       index: false,
                     },
                     height: {
-                      type: long,
+                      type: "long",
                       index: false,
                     },
                     id: {
-                      type: long,
+                      type: "long",
                       index: false,
                     },
                     mime: {
@@ -327,7 +327,7 @@ module.exports = ({ strapi }) => ({
                       index: false,
                     },
                     updatedAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                     url: {
@@ -335,7 +335,7 @@ module.exports = ({ strapi }) => ({
                       index: false,
                     },
                     width: {
-                      type: long,
+                      type: "long",
                       index: false,
                     },
                   },
@@ -343,15 +343,15 @@ module.exports = ({ strapi }) => ({
                 labels: {
                   properties: {
                     createdAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                     id: {
-                      type: long,
+                      type: "long",
                       index: false,
                     },
                     publishedAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                     type: {
@@ -359,7 +359,7 @@ module.exports = ({ strapi }) => ({
                       index: false,
                     },
                     updatedAt: {
-                      type: date,
+                      type: "date",
                       index: false,
                     },
                     value: {
