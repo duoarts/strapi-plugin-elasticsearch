@@ -164,6 +164,15 @@ module.exports = ({ strapi }) => ({
                     populate: populateAttrib["populate"],
                   }
                 );
+                if (!item) {
+                  console.log(
+                    "strapi-plugin-elasticsearch : The item to be indexed was not found."
+                  ), recs[r].item_id;
+                  await scheduleIndexingService.markIndexingTaskComplete(
+                    recs[r].id
+                  );
+                  continue;
+                }
                 const indexItemId = helper.getIndexItemId({
                   collectionName: col,
                   itemId: item.id,
